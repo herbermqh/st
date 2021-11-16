@@ -7,7 +7,7 @@
  * borderperc: percentage of cell width to use as a border
  *		0 = no border, 100 = border width is same as cell width
  */
-static char *font = "SF Mono:pixelsize=14:antialias=true:autohint=true";
+static char *font = "Hack Nerd Font:pixelsize=17:antialias=true:autohint=true";
 /* Spare fonts */
 static char *font2[] = {
         "FontAwesome:pixelsize=14:antialias=true:autohint=true",
@@ -18,8 +18,8 @@ static char *font2[] = {
         "Symbola:pixelsize=14:antialias=true:autohint=true"
 };
 
-static unsigned int borderinpx = 1; /* 0 means using borderperc as border */
-static int borderpx = 20;
+static unsigned int borderinpx = 7; /* 0 means using borderperc as border */
+static int borderpx = 0;
 static int borderperc = 100;
 
 /*
@@ -33,7 +33,7 @@ static int borderperc = 100;
 static char *shell = "/usr/local/bin/fish";
 char *utmp = NULL;
 /* scroll program: to enable use a string like "scroll" */
-char *scroll = NULL;
+char *scroll = "scroll";
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
 /* identification sequence returned in DA and DECID */
@@ -117,7 +117,7 @@ char *termname = "st-256color";
  *
  *	stty tabs
  */
-unsigned int tabspaces = 4;
+unsigned int tabspaces = 2;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
@@ -213,21 +213,25 @@ static MouseShortcut mshortcuts[] = {
 #define C ControlMask
 #define TERMMOD (ControlMask|ShiftMask)
 
+
+
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
 	{ XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} },
 	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-	{ C,                    XK_equal,       zoom,           {.f = +1} },
+        { C,                    XK_plus,        zoom,           {.f = +1} },
 	{ C,                    XK_minus,       zoom,           {.f = -1} },
 	{ C,                    XK_0,           zoomreset,      {.f =  0} },
-	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
-	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
-	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
+	{ C,                    XK_c,           clipcopy,       {.i =  0} },
+	{ C,                    XK_v,           clippaste,      {.i =  0} },
+	{ C,                    XK_y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ MODKEY,               XK_y,           copyurl,        {.i =  0} },
+        { MODKEY,               XK_y,           copyurl,        {.i =  0} }, 
+        { ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
+	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} }, 
 };
 
 /*

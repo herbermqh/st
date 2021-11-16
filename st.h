@@ -91,6 +91,9 @@ void die(const char *, ...);
 void redraw(void);
 void draw(void);
 
+void kscrolldown(const Arg *);
+void kscrollup(const Arg *);
+
 int isboxdraw(Rune);
 ushort boxdrawindex(const Glyph *);
 #ifdef XFT_VERSION
